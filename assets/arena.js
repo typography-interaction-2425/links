@@ -7,12 +7,11 @@ document.head.appendChild(markdownIt)
 
 
 // Okay, Are.na stuff!
-const channelSlug = 'typography-and-interaction-too' // The “slug” is just the end of the URL.
+const channelSlug = 'typography-and-interaction-too' // The “slug” is just the end of the URL
 
 
 
-// First, let’s lay out some *functions*:
-
+// First, let’s lay out some *functions*, starting with our basic metadata:
 const placeChannelInfo = (data) => {
 	// Target some elements in your HTML:
 	const channelTitle = document.getElementById('channel-title')
@@ -21,10 +20,67 @@ const placeChannelInfo = (data) => {
 	const channelLink = document.getElementById('channel-link')
 
 	// Then set their content/attributes to our data:
-	channelTitle.innerText = data.title
-	channelDescription.innerHTML = window.markdownit().render(data.metadata.description) // Markdown → HTML.
-	channelCount.innerText = data.length
+	channelTitle.innerHTML = data.title
+	channelDescription.innerHTML = window.markdownit().render(data.metadata.description) // Converts Markdown → HTML
+	channelCount.innerHTML = data.length
 	channelLink.href = `https://www.are.na/channel/${channelSlug}`
+}
+
+
+
+// Then our big function for specific-block-type rendering:
+const renderBlock = (block) => {
+	// To start, a shared `ul` where we’ll insert all our blocks
+	const channelBlocks = document.getElementById('channel-blocks')
+
+	// Links!
+	if (block.class == 'Link') {
+	}
+
+	// Images!
+	else if (block.class == 'Image') {
+
+	}
+
+	// Text!
+	else if (block.class == 'Text') {
+
+	}
+
+	// Uploaded (not linked) media…
+	else if (block.class == 'Attachment') {
+		const attachment = block.attachment.content_type // Save us some repetition
+
+		// Uploaded videos!
+		if (attachment.includes('video')) {
+
+		}
+
+		// Uploaded PDFs!
+		else if (attachment.includes('pdf')) {
+
+		}
+
+		// Uploaded audio!
+		else if (attachment.includes('audio')) {
+
+		}
+	}
+
+	// Linked media…
+	else if (block.class == 'Media') {
+		const embed = block.embed.type
+
+		// Linked video!
+		if (embed.includes('video')) {
+
+		}
+
+		// Linked audio!
+		else if (embed.includes('rich')) {
+
+		}
+	}
 }
 
 
@@ -33,6 +89,12 @@ const placeChannelInfo = (data) => {
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
 	.then(response => response.json())
 	.then(data => {
-		console.log(data) // Always good to check your  response!
-		placeChannelInfo(data)
+		// console.log(data) // Always good to check your response!
+		placeChannelInfo(data) // Pass the data to the first function
+
+		// Loop through the `contents` array (list), backwards. Are.na returns them in reverse!
+		data.contents.reverse().forEach((block) => {
+			// console.log(block) // The data for a single block
+			renderBlock(block) // Pass the single block data to the render function
+		})
 	})
