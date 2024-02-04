@@ -35,16 +35,31 @@ const renderBlock = (block) => {
 
 	// Links!
 	if (block.class == 'Link') {
+		const linkItem =
+			`
+			<li>
+				<p><em>Link</em></p>
+				<picture>
+					<source media="(max-width: 428px)" srcset="${ block.image.thumb.url }">
+					<source media="(max-width: 640px)" srcset="${ block.image.large.url }">
+					<img src="${ block.image.original.url }">
+				</picture>
+				<h3>${ block.title }</h3>
+				${ block.description_html }
+				<p><a href="${ block.source.url }">See the original ↗</a></p>
+			</li>
+			`
+		channelBlocks.insertAdjacentHTML('beforeend', linkItem)
 	}
 
 	// Images!
 	else if (block.class == 'Image') {
-
+		// …up to you!
 	}
 
 	// Text!
 	else if (block.class == 'Text') {
-
+		// …up to you!
 	}
 
 	// Uploaded (not linked) media…
@@ -58,7 +73,7 @@ const renderBlock = (block) => {
 
 		// Uploaded PDFs!
 		else if (attachment.includes('pdf')) {
-
+			// …up to you!
 		}
 
 		// Uploaded audio!
@@ -87,8 +102,8 @@ const renderBlock = (block) => {
 
 // Now that we have said what we can do, go get the data:
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
-	.then(response => response.json())
-	.then(data => {
+	.then((response) => response.json()) // Return it as JSON
+	.then((data) => {
 		// console.log(data) // Always good to check your response!
 		placeChannelInfo(data) // Pass the data to the first function
 
