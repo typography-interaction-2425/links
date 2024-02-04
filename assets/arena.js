@@ -68,7 +68,17 @@ const renderBlock = (block) => {
 
 		// Uploaded videos!
 		if (attachment.includes('video')) {
-
+			// …still up to you, but we’ll give you the `video` element:
+			const videoItem =
+				`
+				<li>
+					<p><em>Video</em></p>
+					<video controls src="${ block.attachment.url }"></video>
+				</li>
+				`
+			channelBlocks.insertAdjacentHTML('beforeend', videoItem)
+			// More on video, like the `autoplay` attribute:
+			// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video
 		}
 
 		// Uploaded PDFs!
@@ -78,7 +88,16 @@ const renderBlock = (block) => {
 
 		// Uploaded audio!
 		else if (attachment.includes('audio')) {
-
+			// …still up to you, but here’s an `audio` element:
+			const audioItem =
+				`
+				<li>
+					<p><em>Audio</em></p>
+					<audio controls src="${ block.attachment.url }"></video>
+				</li>
+				`
+			channelBlocks.insertAdjacentHTML('beforeend', audioItem)
+			// More on audio: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
 		}
 	}
 
