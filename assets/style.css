@@ -1,7 +1,8 @@
 /* These styles are just to make it easier to see the blocks, initially. */
 
-body {
-	padding: 2em;
+body { padding: 2em; }
+
+body, header, section, footer {
 	display: grid;
 	gap: 1em;
 }
