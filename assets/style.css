@@ -1,6 +1,9 @@
 /* These styles are just to make it easier to see the blocks, initially. */
 
-body { padding: 2em; }
+body {
+	font-family: monospace;
+	padding: 2em;
+}
 
 body, header, section, ul, li, footer {
 	display: grid;
