@@ -1,13 +1,15 @@
 /* These styles are just to make it easier to see the blocks, initially. */
 
 body {
+	--spacing: 2em;
+
 	font-family: monospace;
-	padding: 2em;
+	padding: var(--spacing);
 }
 
 body, header, section, ul, li, footer {
 	display: grid;
-	gap: 1em;
+	gap: var(--spacing);
 }
 
 a { color: blue; }
