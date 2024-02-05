@@ -158,6 +158,6 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 
 		// Also display the owner and collaborators:
 		const channelUsers = document.getElementById('channel-users') // Show them together
-		renderUser(data.owner, channelUsers)
 		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
+		renderUser(data.user, channelUsers)
 	})
