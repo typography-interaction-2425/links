@@ -107,7 +107,6 @@ const renderBlock = (block) => {
 
 		// Linked video!
 		if (embed.includes('video')) {
-			console.log(block)
 			// …still up to you, but here’s an example `iframe` element:
 			const linkedVideoItem =
 				`
@@ -131,8 +130,8 @@ const renderBlock = (block) => {
 
 // Now that we have said what we can do, go get the data:
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
-	.then((response) => response.json()) // Return it as JSON
-	.then((data) => {
+	.then((response) => response.json()) // Return it as JSON data
+	.then((data) => { // Do stuff with the data
 		// console.log(data) // Always good to check your response!
 		placeChannelInfo(data) // Pass the data to the first function
 
