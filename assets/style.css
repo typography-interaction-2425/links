@@ -7,10 +7,12 @@ body {
 	padding: var(--spacing);
 }
 
-body, header, section, ul, li, footer {
+body, header, section, ul, li, footer, address {
 	display: grid;
 	gap: var(--spacing);
 }
+
+main { max-width: 600px }
 
 a { color: blue; }
 em { font-style: italic; }
