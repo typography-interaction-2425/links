@@ -107,12 +107,22 @@ const renderBlock = (block) => {
 
 		// Linked video!
 		if (embed.includes('video')) {
-
+			console.log(block)
+			// …still up to you, but here’s an example `iframe` element:
+			const linkedVideoItem =
+				`
+				<li>
+					<p><em>Linked Video</em></p>
+					${ block.embed.html }
+				</li>
+				`
+			channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem)
+			// More on iframe: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe
 		}
 
 		// Linked audio!
 		else if (embed.includes('rich')) {
-
+			// …up to you!
 		}
 	}
 }
