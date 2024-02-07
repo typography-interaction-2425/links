@@ -7,17 +7,17 @@ document.head.appendChild(markdownIt)
 
 
 // Okay, Are.na stuff!
-const channelSlug = 'typography-and-interaction-too' // The “slug” is just the end of the URL
+let channelSlug = 'typography-and-interaction-too' // The “slug” is just the end of the URL
 
 
 
 // First, let’s lay out some *functions*, starting with our basic metadata:
-const placeChannelInfo = (data) => {
+let placeChannelInfo = (data) => {
 	// Target some elements in your HTML:
-	const channelTitle = document.getElementById('channel-title')
-	const channelDescription = document.getElementById('channel-description')
-	const channelCount = document.getElementById('channel-count')
-	const channelLink = document.getElementById('channel-link')
+	let channelTitle = document.getElementById('channel-title')
+	let channelDescription = document.getElementById('channel-description')
+	let channelCount = document.getElementById('channel-count')
+	let channelLink = document.getElementById('channel-link')
 
 	// Then set their content/attributes to our data:
 	channelTitle.innerHTML = data.title
@@ -29,13 +29,13 @@ const placeChannelInfo = (data) => {
 
 
 // Then our big function for specific-block-type rendering:
-const renderBlock = (block) => {
+let renderBlock = (block) => {
 	// To start, a shared `ul` where we’ll insert all our blocks
-	const channelBlocks = document.getElementById('channel-blocks')
+	let channelBlocks = document.getElementById('channel-blocks')
 
 	// Links!
 	if (block.class == 'Link') {
-		const linkItem =
+		let linkItem =
 			`
 			<li>
 				<p><em>Link</em></p>
@@ -64,12 +64,12 @@ const renderBlock = (block) => {
 
 	// Uploaded (not linked) media…
 	else if (block.class == 'Attachment') {
-		const attachment = block.attachment.content_type // Save us some repetition
+		let attachment = block.attachment.content_type // Save us some repetition
 
 		// Uploaded videos!
 		if (attachment.includes('video')) {
 			// …still up to you, but we’ll give you the `video` element:
-			const videoItem =
+			let videoItem =
 				`
 				<li>
 					<p><em>Video</em></p>
@@ -89,7 +89,7 @@ const renderBlock = (block) => {
 		// Uploaded audio!
 		else if (attachment.includes('audio')) {
 			// …still up to you, but here’s an `audio` element:
-			const audioItem =
+			let audioItem =
 				`
 				<li>
 					<p><em>Audio</em></p>
@@ -103,12 +103,12 @@ const renderBlock = (block) => {
 
 	// Linked media…
 	else if (block.class == 'Media') {
-		const embed = block.embed.type
+		let embed = block.embed.type
 
 		// Linked video!
 		if (embed.includes('video')) {
 			// …still up to you, but here’s an example `iframe` element:
-			const linkedVideoItem =
+			let linkedVideoItem =
 				`
 				<li>
 					<p><em>Linked Video</em></p>
@@ -129,8 +129,8 @@ const renderBlock = (block) => {
 
 
 // It‘s always good to credit your work:
-const renderUser = (user, container) => { // You can have multiple arguments for a function!
-	const userAddress =
+let renderUser = (user, container) => { // You can have multiple arguments for a function!
+	let userAddress =
 		`
 		<address>
 			<img src="${ user.avatar_image.display }">
@@ -147,7 +147,7 @@ const renderUser = (user, container) => { // You can have multiple arguments for
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
 	.then((response) => response.json()) // Return it as JSON data
 	.then((data) => { // Do stuff with the data
-		// console.log(data) // Always good to check your response!
+		console.log(data) // Always good to check your response!
 		placeChannelInfo(data) // Pass the data to the first function
 
 		// Loop through the `contents` array (list), backwards. Are.na returns them in reverse!
@@ -157,7 +157,7 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		})
 
 		// Also display the owner and collaborators:
-		const channelUsers = document.getElementById('channel-users') // Show them together
+		let channelUsers = document.getElementById('channel-users') // Show them together
 		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
 		renderUser(data.user, channelUsers)
 	})
