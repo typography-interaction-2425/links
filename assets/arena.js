@@ -14,10 +14,10 @@ let channelSlug = 'typography-and-interaction-too' // The “slug” is just the
 // First, let’s lay out some *functions*, starting with our basic metadata:
 let placeChannelInfo = (data) => {
 	// Target some elements in your HTML:
-	let channelTitle = document.getElementById('channel-title')
-	let channelDescription = document.getElementById('channel-description')
-	let channelCount = document.getElementById('channel-count')
-	let channelLink = document.getElementById('channel-link')
+	let channelTitle = document.querySelector('#channel-title')
+	let channelDescription = document.querySelector('#channel-description')
+	let channelCount = document.querySelector('#channel-count')
+	let channelLink = document.querySelector('#channel-link')
 
 	// Then set their content/attributes to our data:
 	channelTitle.innerHTML = data.title
@@ -31,7 +31,7 @@ let placeChannelInfo = (data) => {
 // Then our big function for specific-block-type rendering:
 let renderBlock = (block) => {
 	// To start, a shared `ul` where we’ll insert all our blocks
-	let channelBlocks = document.getElementById('channel-blocks')
+	let channelBlocks = document.querySelector('#channel-blocks')
 
 	// Links!
 	if (block.class == 'Link') {
@@ -157,7 +157,7 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		})
 
 		// Also display the owner and collaborators:
-		let channelUsers = document.getElementById('channel-users') // Show them together
+		let channelUsers = document.querySelector('#channel-users') // Show them together
 		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
 		renderUser(data.user, channelUsers)
 	})
